@@ -1,0 +1,30 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+#open txt file as .csv with Pandas and pass error :
+
+requestions = pd.read_csv('C:\z1\week2308-34-ok.txt', sep='\t', error_bad_lines=False, 
+                          comment='#', encoding='utf-8', index_col=0, header = None)
+#make DataFrame by Pandas:
+
+df = pd.DataFrame(requestions)
+
+#make a Column:
+
+df['index'] = df.index
+
+#make Column.lower:
+
+df['index_lower'] = df.index.str.lower()
+
+#count same words in "index lower":
+
+modified_df = pd.DataFrame(df['index_lower'])
+modified_df = modified_df['index_lower'].value_counts().to_frame('amount')
+
+
+modified_df.to_csv('C:\z1\week230834_no_counted.txt', sep='\t', encoding='utf-8')
+modified_df.info()
+modified_df.head()
